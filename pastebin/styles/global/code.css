@@ -1,0 +1,36 @@
+.hljs {
+    display: block;
+    overflow-y: auto;
+    background: #F0F0F0;
+    border-radius: 4px;
+    padding: 0px 8px;
+}
+
+.copy {
+    text-decoration: none;
+    font-family: Consolas;
+    font-size: 15px;
+}
+
+pre code {
+    display: block;
+    font-family: Menlo, Monaco, Consolas, monospace;
+    line-height: 1.5;
+    border: 0px solid #CCC;
+}
+
+@counter-style code-list {
+    system:fixed;
+    prefix: "0";
+    suffix: "|"
+}
+
+pre code ol {
+    padding: 8px 24px;
+    margin: 8px 16px;
+}
+
+pre code ol li::marker {
+    content: counter(list-item, decimal-leading-zero) "› "; 
+    color: #777;
+}
