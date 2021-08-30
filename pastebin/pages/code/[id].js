@@ -19,7 +19,7 @@ export default function Code({statusCode, data}) {
   }
   const message = (
     <>
-      Please Change your ID or Redirect to <Alert.Link href={config.baseURL}>Home Page</Alert.Link>.
+      Please Check your ID or Redirect to <Alert.Link href={config.baseURL}>Home Page</Alert.Link>.
     </>
   )
   const [tip, setTip] = useState(createTipState('danger', 'Data Not Found', message, true));

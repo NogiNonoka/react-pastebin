@@ -8,15 +8,15 @@ export class CodeController {
         private readonly codeService: CodeService
     ) {}
 
-    @Get('find')
-    async find(@Body() body: any) {
-        return await this.codeService.find(body.id);
-    }
+    // @Get('find')
+    // async find(@Body() body: any) {
+    //     return await this.codeService.find(body.id);
+    // }
 
-    @Get('all')
-    async findAll() {
-        return await this.codeService.findAll();
-    }
+    // @Get('all')
+    // async findAll() {
+    //     return await this.codeService.findAll();
+    // }
     
     @Post('write')
     async write(@Body() body: any) {

@@ -28,7 +28,8 @@ export default function Post({ setTip }) {
       data: {
         id: id,
         title: title,
-        expiration: moment().unix() + expiration,
+        expiration: expiration,
+        expiraAt: moment((moment().unix() + expiration) * 1000).format('YYYY-MM-DD HH:mm:ss').toString(),
         language: language,
         code: code,
       },
@@ -111,7 +112,7 @@ export default function Post({ setTip }) {
                 <Col sm={9}>
                   <Form.Select
                     value={expiration}
-                    onChange={(e) => setExpiration(e.target.value)}
+                    onChange={(e) => setExpiration(parseInt(e.target.value))}
                   >
                     <option value={30 * 60}>30 min</option>
                     <option value={60 * 60}>1 hour</option>

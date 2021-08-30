@@ -1,29 +1,23 @@
 import { Injectable, HttpStatus } from '@nestjs/common';
-import { Model } from 'mongoose';
-import { InjectModel } from '@nestjs/mongoose';
+// import { Model } from 'mongoose';
+// import { InjectModel } from '@nestjs/mongoose';
 import { redis } from '../redis'
 import { Code } from './code.interface';
 
 @Injectable()
 export class CodeService {
     constructor(
-        @InjectModel('data')
-        private readonly codeModel: Model<Code>
+        // @InjectModel('data')
+        // private readonly codeModel: Model<Code>
     ) {}
 
-    async find(_id: string): Promise<Code> {
-        return await this.codeModel.findById(_id);
-    }
+    // async find(_id: string): Promise<Code> {
+    //     return await this.codeModel.findById(_id);
+    // }
 
-    async findAll(): Promise<Code[]> {
-        return await this.codeModel.find({});
-    }
-
-    cacheTTL(data: Code): number {
-        const moment = require('moment');
-        const ttl = Math.floor((data.expiration - moment().unix())) + 60 * 10;
-        return ttl;
-    }
+    // async findAll(): Promise<Code[]> {
+    //     return await this.codeModel.find({});
+    // }
 
     async writeCache(data: Code) {
         const exist = await redis.exists(data.id);
@@ -31,10 +25,10 @@ export class CodeService {
             return { message: 'Invalid ID', statusCode: HttpStatus.FORBIDDEN };
         }
         await redis.hset(data.id, "title", data.title);
-        await redis.hset(data.id, "expiration", data.expiration);
+        await redis.hset(data.id, "expiraAt", data.expiraAt);
         await redis.hset(data.id, "language", data.language);
         await redis.hset(data.id, "code", data.code);
-        await redis.expire(data.id, this.cacheTTL(data))
+        await redis.expire(data.id, data.expiration)
         return { message: 'Success', statusCode: HttpStatus.OK }
     }
 
