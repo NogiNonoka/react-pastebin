@@ -114,7 +114,7 @@ export default function Post({ setTip }) {
                     onChange={(e) => setExpiration(e.target.value)}
                   >
                     <option value={30 * 60}>30 min</option>
-                    <option value={60 * 60}>1 hours</option>
+                    <option value={60 * 60}>1 hour</option>
                     <option value={120 * 60}>2 hours</option>
                     <option value={300 * 60}>5 hours</option>
                   </Form.Select>
