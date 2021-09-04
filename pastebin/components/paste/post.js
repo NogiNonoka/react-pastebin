@@ -27,7 +27,7 @@ export default function Post({ setTip }) {
       method: "POST",
       data: {
         id: id,
-        title: title,
+        title: title.replace(' ', '-'),
         expiration: expiration,
         expiraAt: moment((moment().unix() + expiration) * 1000).format('YYYY-MM-DD HH:mm:ss').toString(),
         language: language,
