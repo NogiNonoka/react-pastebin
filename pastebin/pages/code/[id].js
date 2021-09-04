@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Alert } from 'react-bootstrap'
 import axios from 'axios'
 import config from '../../config'
+import Head from '../components/common/head'
 import Navbar from '../../components/common/navbar'
 import Tip, { createTipState } from '../../components/common/tip'
 import CodeView from '../../components/code/view'
@@ -11,6 +12,7 @@ export default function Code({statusCode, data}) {
   if (statusCode === 200) {
     return (
       <>
+        <Head title={"Code: " + data.title}/>
         <Navbar />
         <CodeInfo data={data}/>
         <CodeView code={data.code} language={data.language}/>

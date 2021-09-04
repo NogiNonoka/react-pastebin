@@ -5,7 +5,7 @@ export default function NavBar() {
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">PasteBin</Navbar.Brand>
+          <Navbar.Brand href="/">Pastebin</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
           </Nav>
