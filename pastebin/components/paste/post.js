@@ -26,7 +26,7 @@ export default function Post({ setTip }) {
       url: config.api.write,
       method: "POST",
       data: {
-        id: id.replace(' ', '-'),
+        id: id.replace(/\s/g, '-'),
         title: title,
         expiration: expiration,
         expiraAt: moment((moment().unix() + expiration) * 1000).format('YYYY-MM-DD HH:mm:ss').toString(),
@@ -35,7 +35,7 @@ export default function Post({ setTip }) {
       },
     }).then((res) => {
       if (res.data.statusCode === 200) {
-        window.location.href = config.baseURL + "/code/" + id.replace(' ', '-');
+        window.location.href = config.baseURL + "/code/" + id.replace(/\s/g, '-');
       }
       if (res.data.statusCode === 403) {
         const message = (
