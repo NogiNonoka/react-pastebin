@@ -26,8 +26,8 @@ export default function Post({ setTip }) {
       url: config.api.write,
       method: "POST",
       data: {
-        id: id,
-        title: title.replace(' ', '-'),
+        id: id.replace(' ', '-'),
+        title: title,
         expiration: expiration,
         expiraAt: moment((moment().unix() + expiration) * 1000).format('YYYY-MM-DD HH:mm:ss').toString(),
         language: language,
