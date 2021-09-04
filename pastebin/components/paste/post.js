@@ -35,7 +35,7 @@ export default function Post({ setTip }) {
       },
     }).then((res) => {
       if (res.data.statusCode === 200) {
-        window.location.href = config.baseURL + "/code/" + id;
+        window.location.href = config.baseURL + "/code/" + id.replace(' ', '-');
       }
       if (res.data.statusCode === 403) {
         const message = (
