@@ -6,18 +6,15 @@ import { Code } from './code.interface';
 
 @Injectable()
 export class CodeService {
-    constructor(
-        // @InjectModel('data')
-        // private readonly codeModel: Model<Code>
-    ) {}
+    constructor() {}
 
-    // async find(_id: string): Promise<Code> {
-    //     return await this.codeModel.findById(_id);
-    // }
-
-    // async findAll(): Promise<Code[]> {
-    //     return await this.codeModel.find({});
-    // }
+    async checkID(id: string) {
+        const exist = await redis.exists(id);
+        if (exist === 1) {
+            return { statusCode: HttpStatus.FORBIDDEN };
+        }
+        return { statusCode: HttpStatus.OK }
+    }
 
     async writeCache(data: Code) {
         const exist = await redis.exists(data.id);

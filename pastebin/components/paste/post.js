@@ -16,9 +16,28 @@ import { createTipState } from "../common/tip";
 export default function Post({ setTip }) {
   const [id, setID] = useState("");
   const [title, setTitle] = useState("");
-  const [expiration, setExpiration] = useState(30 * 60);
+  const [valid, setValid] = useState("is-invalid");
+  const [expiration, setExpiration] = useState(120 * 60);
   const [language, setLanguage] = useState("C++");
   const [code, setCode] = useState("");
+
+  const checkID = async (id) => {
+    if (id === null || id === undefined || id === "") {
+      setValid("is-invalid");
+      return;
+    }
+    axios({
+      url: config.api.check,
+      method: "POST",
+      data: {id: id.replace(/\s/g, '-')}
+    }).then((res) => {
+      if (res.data.statusCode === 200) {
+        setValid("is-valid");
+      } else {
+        setValid("is-invalid");
+      }
+    });
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +73,7 @@ export default function Post({ setTip }) {
           handleSubmit(e);
         }}
       >
-        <Form.Group as={Row} className="mb-3" controlId="key">
+        <Form.Group as={Row} className="mb-3" controlId="id">
           <Form.Label column sm={1}>
             ID
           </Form.Label>
@@ -62,8 +81,10 @@ export default function Post({ setTip }) {
             <Form.Control
               type="text"
               placeholder="ID"
+              className={valid}
               value={id}
               onChange={(e) => setID(e.target.value)}
+              onBlur={(e) => checkID(e.target.value)}
               required
             />
           </Col>
@@ -94,10 +115,9 @@ export default function Post({ setTip }) {
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
                   >
-                    <option value="C++">C++</option>
-                    <option value="Java">Java</option>
-                    <option value="Python">Python</option>
-                    <option value="Text">Text</option>
+                    { config.supportCodeLang.map((item) => (
+                      <option value={item.value} key={item.value}>{item.name}</option>
+                    )) }
                   </Form.Select>
                 </Col>
               </Row>
@@ -114,10 +134,10 @@ export default function Post({ setTip }) {
                     value={expiration}
                     onChange={(e) => setExpiration(parseInt(e.target.value))}
                   >
-                    <option value={30 * 60}>30 min</option>
-                    <option value={60 * 60}>1 hour</option>
-                    <option value={120 * 60}>2 hours</option>
-                    <option value={300 * 60}>5 hours</option>
+                    <option value={2 * 60 * 60}>2 hours</option>
+                    <option value={5 * 60 * 60}>5 hours</option>
+                    <option value={24 * 60 * 60}>1 day</option>
+                    <option value={48 * 60 * 60}>2 days</option>
                   </Form.Select>
                 </Col>
               </Row>

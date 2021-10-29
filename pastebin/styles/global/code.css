@@ -26,11 +26,30 @@ pre code {
 }
 
 pre code ol {
-    padding: 8px 24px;
-    margin: 8px 16px;
+    margin: 12px 16px;
+}
+
+pre code ol li {
+    white-space: pre-wrap;
 }
 
 pre code ol li::marker {
-    content: counter(list-item, decimal-leading-zero) "› "; 
+    content: counter(list-item) "› "; 
     color: #777;
 }
+
+/* pre code ol li::marker {
+    content: "000" counter(list-item) "› ";
+}
+  
+pre code ol li:nth-child(n+10)::marker {
+    content: "00" counter(list-item) "› ";
+}
+
+pre code ol li:nth-child(n+100)::marker {
+    content: "0" counter(list-item) "› ";
+}
+
+pre code ol li:nth-child(n+1000)::marker {
+    content: counter(items) "› ";
+} */
