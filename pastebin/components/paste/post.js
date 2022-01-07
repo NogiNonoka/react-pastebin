@@ -4,6 +4,7 @@ import moment from "moment";
 import {
   Alert,
   Button,
+  ButtonGroup,
   Container,
   Form,
   FloatingLabel,
@@ -17,12 +18,12 @@ export default function Post({ setTip }) {
   const [id, setID] = useState("");
   const [title, setTitle] = useState("");
   const [valid, setValid] = useState("is-invalid");
-  const [expiration, setExpiration] = useState(120 * 60);
+  const [expiration, setExpiration] = useState(2 * 60 * 60);
   const [language, setLanguage] = useState("C++");
   const [code, setCode] = useState("");
 
   const checkID = async (id) => {
-    if (id === null || id === undefined || id === "") {
+    if (id === null || id === undefined || id === '') {
       setValid("is-invalid");
       return;
     }
@@ -46,7 +47,7 @@ export default function Post({ setTip }) {
       method: "POST",
       data: {
         id: id.replace(/\s/g, '-'),
-        title: title,
+        title: title === '' ? id : title,
         expiration: expiration,
         expiraAt: moment((moment().unix() + expiration) * 1000).format('YYYY-MM-DD HH:mm:ss').toString(),
         language: language,
@@ -66,6 +67,14 @@ export default function Post({ setTip }) {
       }
     });
   };
+
+  const handleReset = () => {
+    setID("");
+    setValid("is-invalid");
+    setTitle("");
+    setCode("");
+  }
+
   return (
     <Container style={{ marginTop: "24px", marginBottom: "24px" }}>
       <Form
@@ -99,7 +108,6 @@ export default function Post({ setTip }) {
               placeholder="Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              required
             />
           </Col>
         </Form.Group>
@@ -107,15 +115,15 @@ export default function Post({ setTip }) {
           <Col>
             <Form.Group controlId="language">
               <Row>
-                <Form.Label column sm={2}>
+                <Form.Label column sm="auto">
                   Language
                 </Form.Label>
-                <Col sm={9}>
+                <Col>
                   <Form.Select
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
                   >
-                    { config.supportCodeLang.map((item) => (
+                    { config.supportCodeLangOptions.map((item) => (
                       <option value={item.value} key={item.value}>{item.name}</option>
                     )) }
                   </Form.Select>
@@ -126,29 +134,33 @@ export default function Post({ setTip }) {
           <Col>
             <Form.Group controlId="expiration">
               <Row>
-                <Form.Label column sm={2}>
+                <Form.Label column sm="auto">
                   Expiration
                 </Form.Label>
-                <Col sm={9}>
+                <Col>
                   <Form.Select
                     value={expiration}
                     onChange={(e) => setExpiration(parseInt(e.target.value))}
                   >
-                    <option value={2 * 60 * 60}>2 hours</option>
-                    <option value={5 * 60 * 60}>5 hours</option>
-                    <option value={24 * 60 * 60}>1 day</option>
-                    <option value={48 * 60 * 60}>2 days</option>
+                    { config.expirationOptions.map((item) => (
+                      <option value={item.value} key={item.value}>{item.text}</option>
+                    )) }
                   </Form.Select>
                 </Col>
               </Row>
             </Form.Group>
           </Col>
-          <Col xs="auto">
+        </Row>
+        <Form.Group style={{textAlign: "right"}}>
+          <ButtonGroup >
             <Button type="submit" className="mb-2">
               Submit
             </Button>
-          </Col>
-        </Row>
+            <Button type="button" onClick={() => handleReset()} className="mb-2" variant="secondary">
+              Reset
+            </Button>
+          </ButtonGroup>
+        </Form.Group>
         <FloatingLabel controlId="code" label="Code">
           <Form.Control
             as="textarea"

@@ -9,28 +9,28 @@ import CodeView from '../../components/code/view'
 import CodeInfo from '../../components/code/info'
 
 export default function Code({statusCode, data}) {
-  if (statusCode === 200) {
+  if (statusCode !== 200) {
+    const message = (
+      <>
+        Please Check your ID or Redirect to <Alert.Link href={config.baseURL}>Home Page</Alert.Link>.
+      </>
+    )
+    const [tip, setTip] = useState(createTipState('danger', 'Data Not Found', message, true));
     return (
       <>
-        <Head title={"Code: " + data.title}/>
         <Navbar />
-        <CodeInfo data={data}/>
-        <CodeView code={data.code} language={data.language}/>
+        <Tip tip={tip} setTip={setTip} />
       </>
-    );
+    )
   }
-  const message = (
-    <>
-      Please Check your ID or Redirect to <Alert.Link href={config.baseURL}>Home Page</Alert.Link>.
-    </>
-  )
-  const [tip, setTip] = useState(createTipState('danger', 'Data Not Found', message, true));
   return (
     <>
+      <Head title={"Code: " + data.title}/>
       <Navbar />
-      <Tip tip={tip} setTip={setTip} />
+      <CodeInfo data={data}/>
+      <CodeView code={data.code} language={data.language}/>
     </>
-  )
+  );
 }
 
 export async function getServerSideProps({params}) {
