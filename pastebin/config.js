@@ -1,7 +1,7 @@
-const apiURL = "http://localhost:3030/";
+const apiURL = "http://localhost:4040/";
 
 export default {
-    baseURL: "http://localhost:3000/",
+    baseURL: "http://localhost:4000/",
     api: {
         read: apiURL + "code/read",
         write: apiURL + "code/write",
@@ -10,11 +10,11 @@ export default {
     supportCodeLangOptions: [
         {name: 'C/C++', value: 'C++'},
         {name: 'Java', value: 'Java'},
-        {name: 'Python', value: 'Pyhton'},
+        {name: 'Python', value: 'Python'},
         {name: 'Html', value: 'Html'},
         {name: 'JavaScript', value: 'JavaScript'},
         {name: 'TypeScript', value: 'TypeScript'},
-        {name: 'Text', value: 'text'}
+        {name: 'Text', value: 'Plain Text'}
     ],
     expirationOptions: [
         {text: '2 hours', value: 2 * 60 * 60},

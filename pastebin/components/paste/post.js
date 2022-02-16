@@ -55,12 +55,12 @@ export default function Post({ setTip }) {
       },
     }).then((res) => {
       if (res.data.statusCode === 200) {
-        window.location.href = config.baseURL + "/code/" + id.replace(/\s/g, '-');
+        window.location.href = config.baseURL + "code/" + id.replace(/\s/g, '-');
       }
       if (res.data.statusCode === 403) {
         const message = (
           <>
-            Please Change your ID or Redirect to <Alert.Link href={config.baseURL + "/code/" + id}>Code Page</Alert.Link>.
+            Please Change your ID or Redirect to <Alert.Link href={config.baseURL + "code/" + id}>Code Page</Alert.Link>.
           </>
         )
         setTip(createTipState('danger', res.data.message, message, true))
@@ -161,16 +161,16 @@ export default function Post({ setTip }) {
             </Button>
           </ButtonGroup>
         </Form.Group>
-        <FloatingLabel controlId="code" label="Code">
+        {/* <FloatingLabel controlId="code" label="Code"> */}
           <Form.Control
             as="textarea"
             placeholder="Paste your code here"
-            style={{ height: "600px" }}
+            style={{ height: "600px", marginTop: "12px" }}
             value={code}
             onChange={(e) => setCode(e.target.value)}
             required
           />
-        </FloatingLabel>
+        {/* </FloatingLabel> */}
       </Form>
     </Container>
   );
