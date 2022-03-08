@@ -1,11 +1,11 @@
 # react-pastebin
 
-Pastebin based on Next.js, Nest.js, Redis, MongoDB.
+Pastebin based on Next.js, Nest.js, Redis.
 
-## Pastebin
+## Front-end
 
 Next.js
 
 ## Server
 
-nest.js
+Nest.js
