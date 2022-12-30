@@ -153,11 +153,11 @@ export default function Post({ setTip }) {
         </Row>
         <Form.Group style={{textAlign: "right"}}>
           <ButtonGroup >
-            <Button type="submit" className="mb-2">
-              Submit
-            </Button>
             <Button type="button" onClick={() => handleReset()} className="mb-2" variant="secondary">
               Reset
+            </Button>
+            <Button type="submit" className="mb-2">
+              Submit
             </Button>
           </ButtonGroup>
         </Form.Group>
