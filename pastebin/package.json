@@ -8,6 +8,7 @@
     "start": "next start -p 4000"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.4.6",
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
     "highlight.js": "^11.2.0",

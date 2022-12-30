@@ -1,19 +1,26 @@
-const apiURL = "http://localhost:4040/";
+var apiURL = "http://localhost:4040/";
+var baseURL = "http://localhost:4000/";
+
+if (process.env.RUNTIME === "production") {
+    var apiURL = "http://1.15.5.104:4040/";
+    var baseURL = "http://1.15.5.104:4000/";
+}
 
 export default {
-    baseURL: "http://localhost:4000/",
+    baseURL: baseURL,
     api: {
         read: apiURL + "code/read",
         write: apiURL + "code/write",
         check: apiURL + "code/check",
     },
     supportCodeLangOptions: [
-        {name: 'C/C++', value: 'C++'},
-        {name: 'Java', value: 'Java'},
-        {name: 'Python', value: 'Python'},
-        {name: 'Html', value: 'Html'},
-        {name: 'JavaScript', value: 'JavaScript'},
-        {name: 'TypeScript', value: 'TypeScript'},
+        {name: 'C++', value: 'cpp'},
+        {name: 'Java', value: 'java'},
+        {name: 'Python', value: 'python'},
+        {name: 'JavaScript', value: 'javascript'},
+        {name: 'TypeScript', value: 'typescript'},
+        {name: 'MarkDown', value: 'markdown'},
+        {name: 'JSON', value: 'json'},
         {name: 'Text', value: 'Plain Text'}
     ],
     expirationOptions: [

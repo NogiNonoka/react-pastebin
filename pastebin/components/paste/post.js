@@ -7,19 +7,19 @@ import {
   ButtonGroup,
   Container,
   Form,
-  FloatingLabel,
   Row,
   Col,
 } from "react-bootstrap";
 import config from "../../config";
 import { createTipState } from "../common/tip";
+import Code from "../code/editor";
 
 export default function Post({ setTip }) {
   const [id, setID] = useState("");
   const [title, setTitle] = useState("");
   const [valid, setValid] = useState("is-invalid");
   const [expiration, setExpiration] = useState(2 * 60 * 60);
-  const [language, setLanguage] = useState("C++");
+  const [language, setLanguage] = useState("cpp");
   const [code, setCode] = useState("");
 
   const checkID = async (id) => {
@@ -161,17 +161,17 @@ export default function Post({ setTip }) {
             </Button>
           </ButtonGroup>
         </Form.Group>
-        {/* <FloatingLabel controlId="code" label="Code"> */}
-          <Form.Control
-            as="textarea"
-            placeholder="Paste your code here"
-            style={{ height: "600px", marginTop: "12px" }}
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            required
-          />
-        {/* </FloatingLabel> */}
+        {/* <Form.Control
+          as="textarea"
+          placeholder="Paste your code here"
+          style={{ height: "600px", marginTop: "12px" }}
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          required
+        /> */}
+        <Code language={language} readOnly={false} code={code} setCode={setCode}/>
       </Form>
+      
     </Container>
   );
 }

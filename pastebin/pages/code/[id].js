@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { Alert } from 'react-bootstrap'
+import { Alert, Container } from 'react-bootstrap'
 import axios from 'axios'
 import config from '../../config'
 import Head from '../../components/common/head'
 import Navbar from '../../components/common/navbar'
 import Tip, { createTipState } from '../../components/common/tip'
 import CodeView from '../../components/code/view'
+import CodeEditor from '../../components/code/editor'
 import CodeInfo from '../../components/code/info'
 
 export default function Code({statusCode, data}) {
@@ -27,8 +28,13 @@ export default function Code({statusCode, data}) {
     <>
       <Head title={"Code: " + data.title}/>
       <Navbar />
-      <CodeInfo data={data}/>
-      <CodeView code={data.code} language={data.language}/>
+      <Container style={{ marginTop: "24px" }}>
+        <CodeInfo data={data}/>
+      </Container>
+      <Container style={{ marginTop: "24px" }}>
+        <CodeEditor code={data.code} language={data.language} />
+      </Container>
+      {/* <CodeView code={data.code} language={data.language}/> */}
     </>
   );
 }
@@ -44,8 +50,9 @@ export async function getServerSideProps({params}) {
     .then((res) => {
       if (res.data.statusCode === 200) {
         resolve({ props: { statusCode: res.data.statusCode, data: res.data.data } });
+      } else {
+        resolve({ props: { statusCode: res.data.statusCode, data: {}}})
       }
-      resolve({ props: { statusCode: res.data.statusCode, data: {}}})
     })
   });
   return await promise;

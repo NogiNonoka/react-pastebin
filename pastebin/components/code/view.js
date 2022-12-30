@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import highlight from "./highlight-line-numbers";
 
 export default function CodeView({code, language}) {
